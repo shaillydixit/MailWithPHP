@@ -24,13 +24,9 @@ $mail->setFrom('sender@example.com');
 $mail->addAddress('recipient@example.com');
 
 $mail->Subject = 'An email sent from PHP';
-$mail->Body = '<h2>External Image</h2>'
-             . '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/265px-Red_Apple.jpg">'
+$mail->Body = '<h1 style="font-style: italic;">Hello</h1>'
              . "\n"
-             . '<h2>Embedded Image</h2>'
-             . '<img src="cid:banana">';
-
-$mail->AddEmbeddedImage(dirname(__FILE__) . '/banana.png', 'banana');
+             . '<p style="color: #f00;">This is an email with some <span style="color: #0f0">CSS styles</span>.</p>';
 
 
 if ($mail->send()) {
