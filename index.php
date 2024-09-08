@@ -15,7 +15,7 @@ $mail->Port = Config::SMTP_PORT;
 $mail->Username = Config::SMTP_USER;
 $mail->Password = Config::SMTP_PASSWORD;
 $mail->CharSet = 'UTF-8';
-
+$mail->isHTML(true);
 
 /**
  * Send an email
@@ -24,9 +24,14 @@ $mail->setFrom('sender@example.com');
 $mail->addAddress('recipient@example.com');
 
 $mail->Subject = 'An email sent from PHP';
-$mail->Body = 'Please find a file attached.';
+$mail->Body = '<h2>External Image</h2>'
+             . '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/265px-Red_Apple.jpg">'
+             . "\n"
+             . '<h2>Embedded Image</h2>'
+             . '<img src="cid:banana">';
 
-$mail->addAttachment(dirname(__FILE__) . '/example.pdf', 'sample.pdf');
+$mail->AddEmbeddedImage(dirname(__FILE__) . '/banana.png', 'banana');
+
 
 if ($mail->send()) {
 	echo 'Message sent!';
