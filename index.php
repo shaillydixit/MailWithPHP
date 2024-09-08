@@ -22,6 +22,7 @@ $mail->Password = Config::SMTP_PASSWORD;
 // $mail->SMTPDebug = 2;
 
 
+
 /**
  * Send an email
  */
@@ -29,17 +30,8 @@ $mail->setFrom('sender@example.com');
 $mail->addAddress('recipient@example.com');
 
 
-// Multiple "To" addresses
-$mail->addAddress('alice@example.com', 'Alice');
-$mail->addAddress('alan@example.com');
-
-// "Cc" addresses
-$mail->addCC('colin@example.com', 'Colin');
-$mail->addCC('chris@example.com');
-
-// "Bcc" addresses
-$mail->addBCC('bob@example.com');
-$mail->addBCC('becky@example.com');
+// Add a different reply to address
+$mail->addReplyTo('shaillydixit999@gmail.com', 'Shailly');
 
 
 $mail->Subject = 'An email sent from PHP';
