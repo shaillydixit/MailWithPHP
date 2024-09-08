@@ -33,6 +33,8 @@ $mail->Body = '<h1 style="font-style: italic;">Hello</h1>'
              . "\n"
              . '<p style="color: #f00;">This is an email with some <span style="color: #0f0">CSS styles</span>.</p>';
 
+$mail->AltBody = "Hello.\nThis is the body in plain text for non-HTML mail clients";
+
 
 if ($mail->send()) {
 	echo 'Message sent!';
