@@ -1,5 +1,10 @@
 <?php
 
+// https://www.campaignmonitor.com/email-templates/
+// https://www.emailonacid.com/
+// https://www.litmus.com/
+// https://www.pinpointe.com/blog/email-campaign-html-and-css-support/
+
 use PHPMailer\PHPMailer\PHPMailer;
 
 require 'vendor/autoload.php';
