@@ -23,12 +23,15 @@ $mail->CharSet = 'UTF-8';
 $mail->setFrom('sender@example.com');
 $mail->addAddress('recipient@example.com');
 
-$mail->Subject = '¿Qué tal estás?';
-$mail->Body    = '¡Hola! ¡Se envió este correo desde PHP!';
+$mail->Subject = 'An email sent from PHP';
+$mail->Body = 'Please find a file attached.';
+
+$mail->addAttachment(dirname(__FILE__) . '/example.pdf', 'sample.pdf');
 
 if ($mail->send()) {
 	echo 'Message sent!';
 } else {
     echo 'Mailer error: ' . $mail->ErrorInfo;
 }
+
 
