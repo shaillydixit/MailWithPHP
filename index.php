@@ -1,45 +1,43 @@
-<?php
-
-// https://www.campaignmonitor.com/email-templates/
-// https://www.emailonacid.com/
-// https://www.litmus.com/
-// https://www.pinpointe.com/blog/email-campaign-html-and-css-support/
-
-use PHPMailer\PHPMailer\PHPMailer;
-
-require 'vendor/autoload.php';
-require 'classes/config.php';
+<!-- https://www.campaignmonitor.com/email-templates/
+https://www.emailonacid.com/
+https://www.litmus.com/
+https://www.pinpointe.com/blog/email-campaign-html-and-css-support/
+https://templates.mailchimp.com/resources/html-to-text/ -->
 
 
-$mail = new PHPMailer();
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Send an email</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script>
+        $( document ).ready(function() {
+            /**
+             * When the form is submitted, disable the submit button and display the loading image
+             */
+            $('#emailForm').on('submit', function() {
+                $('#sendButton').prop('disabled', true);
+                $('#progressImage').show();
+            })
+        });
+    </script>
+</head>
+<body>
 
-$mail->isSMTP();
-$mail->Host = Config::SMTP_HOST;
-$mail->SMTPAuth = true;
-$mail->Port = Config::SMTP_PORT;
-$mail->Username = Config::SMTP_USER;
-$mail->Password = Config::SMTP_PASSWORD;
-$mail->CharSet = 'UTF-8';
-$mail->isHTML(true);
+    <h1>Send an email</h1>
 
-/**
- * Send an email
- */
-$mail->setFrom('sender@example.com');
-$mail->addAddress('recipient@example.com');
+    <p><?php echo $_GET['time'] ?? ''; ?></p>
 
-$mail->Subject = 'An email sent from PHP';
-$mail->Body = '<h1 style="font-style: italic;">Hello</h1>'
-             . "\n"
-             . '<p style="color: #f00;">This is an email with some <span style="color: #0f0">CSS styles</span>.</p>';
+    <form action="send.php" method="post" id="emailForm">
+        <button type="submit" id="sendButton">Send</button>
+        <img src="loading.gif" width="16" height="16" id="progressImage" class="hidden" />
+    </form>
 
-$mail->AltBody = "Hello.\nThis is the body in plain text for non-HTML mail clients";
-
-
-if ($mail->send()) {
-	echo 'Message sent!';
-} else {
-    echo 'Mailer error: ' . $mail->ErrorInfo;
-}
-
-
+</body>
+</html>
