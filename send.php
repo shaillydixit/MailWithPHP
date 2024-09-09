@@ -10,38 +10,33 @@ $start_time = microtime(true);
 
 
 /**
- * Include external classes
+ * Composer autoloader
  */
 require 'vendor/autoload.php';
-require 'classes/Config.php';
 
 
 /**
- * Configure PHPMailer
+ * Create a new email
  */
 $mail = new PHPMailer();
 
-$mail->isSMTP();
-$mail->Host = Config::SMTP_HOST;
-$mail->Port = Config::SMTP_PORT;
-$mail->SMTPAuth = true;
-$mail->Username = Config::SMTP_USER;
-$mail->Password = Config::SMTP_PASSWORD;
-$mail->SMTPSecure = 'tls';
-$mail->CharSet = 'UTF-8';
-
-
-/**
- * Send an email
- */
 $mail->setFrom('sender@example.com');
 $mail->addAddress('recipient@example.com');
 
 $mail->Subject = 'An email sent from PHP';
 $mail->Body = 'This is a test message';
 
-if ( ! $mail->send()) {
-    echo 'Mailer error: ' . $mail->ErrorInfo;
+
+
+/**
+ * Add the email to the queue
+ */
+$dir = __DIR__ . '/queue/';
+$queue = new Queue($dir);
+
+if ($queue->push($mail) === false)
+{
+    echo 'Unable to queue email';
     exit();
 }
 
